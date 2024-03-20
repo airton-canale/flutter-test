@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import './questao.dart';
+import './resposta.dart';
 
 main() {
   runApp(PerguntaApp());
 }
 
 class _PerguntaAppState extends State<PerguntaApp> {
-   var perguntaSelecionada = 0;
+  var perguntaSelecionada = 0;
 
   void _responder() {
     setState(() {
-    perguntaSelecionada++;
+      perguntaSelecionada++;
     });
-    print(perguntaSelecionada);
   }
 
   @override
@@ -23,27 +23,25 @@ class _PerguntaAppState extends State<PerguntaApp> {
     ];
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Perguntas'),
-        ),
-        body: Column(
-          children: <Widget>[
-            Questao(perguntas[perguntaSelecionada]),
-            OutlinedButton(
-              child: Text('Resposta 1'),
-              onPressed: _responder,
+          appBar: AppBar(
+            title: const Text(
+              'Perguntas',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
             ),
-             OutlinedButton(
-              child: Text('Resposta 2'),
-              onPressed: _responder,
-            ),
-             OutlinedButton(
-              child: Text('Resposta 3'),
-              onPressed: _responder,
-            )
-          ],
-        )
-      ),
+            centerTitle: true,
+            backgroundColor: Colors.blue,
+          ),
+          body: Column(
+            children: <Widget>[
+              Questao(perguntas[perguntaSelecionada]),
+              Resposta('Resposta 1', _responder),
+              Resposta('Resposta 2', _responder),
+              Resposta('Resposta 3', _responder)
+            ],
+          )),
     );
   }
 }
